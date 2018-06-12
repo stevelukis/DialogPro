@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator
+import com.stevelukis.dialogpro.listener.OnPageSelectedListener
 
 class DialogPro : DialogFragment() {
 
@@ -31,11 +32,44 @@ class DialogPro : DialogFragment() {
     }
 
     private lateinit var fragments: Array<Fragment>
+    private var leftArrowResId = R.drawable.left_arrow
+    private var rightArrowResId = R.drawable.right_arrow
+    private var onPageSelectedListener: OnPageSelectedListener? = null
     private var flag = FLAG_KEEP
+
+    fun setFlag(flag: Int): DialogPro =
+            this.let {
+                it.flag = flag
+                it
+            }
+
+    fun setFragments(fragments: Array<Fragment>): DialogPro =
+            this.let {
+                it.fragments = fragments
+                it
+            }
+
+    fun setOnPageSelectedListener(onPageSelectedListener: OnPageSelectedListener): DialogPro =
+            this.let {
+                it.onPageSelectedListener = onPageSelectedListener
+                it
+            }
+
+    fun setArrowFromRes(leftArrowResId: Int, rightArrowResId: Int): DialogPro {
+        this.leftArrowResId = leftArrowResId
+        this.rightArrowResId = rightArrowResId
+        return this
+    }
+
+    fun show(activity: AppCompatActivity): DialogPro =
+            this.let {
+                it.show(activity.supportFragmentManager, "")
+                it
+            }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.dialog_pro, container).let {
-                val htViewPager = it.findViewById<ViewPager>(R.id.viewPager)
+                val viewPager = it.findViewById<ViewPager>(R.id.viewPager)
 
                 val adapter = ProPagerAdapter(fragments)
                 val fragmentManager = childFragmentManager
@@ -64,11 +98,21 @@ class DialogPro : DialogFragment() {
                     }
                 }
 
-                htViewPager.adapter = pagerAdapter
+                viewPager.adapter = pagerAdapter
+                viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                    override fun onPageScrollStateChanged(state: Int) {}
 
-                val htViewPagerArrowIndicator = it.findViewById<ViewPagerArrowIndicator>(R.id.viewPagerArrowIndicator)
-                htViewPagerArrowIndicator.bind(htViewPager)
-                htViewPagerArrowIndicator.setArrowIndicatorRes(R.drawable.left_arrow, R.drawable.right_arrow)
+                    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+                    override fun onPageSelected(position: Int) {
+                        onPageSelectedListener?.onPageSelected(position)
+                    }
+                })
+
+
+                val viewPagerArrowIndicator = it.findViewById<ViewPagerArrowIndicator>(R.id.viewPagerArrowIndicator)
+                viewPagerArrowIndicator.bind(viewPager)
+                viewPagerArrowIndicator.setArrowIndicatorRes(leftArrowResId, rightArrowResId)
 
                 it
             }

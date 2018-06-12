@@ -3,7 +3,9 @@ package com.stevelukis.dialogpro
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import com.stevelukis.dialogpro.listener.OnPageSelectedListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onClick(view: View) {
         val fragments = arrayOf<Fragment>(
                 SampleFragment().let {
@@ -36,6 +39,15 @@ class MainActivity : AppCompatActivity() {
                     it
                 }
         )
-        DialogPro.show(this, fragments, DialogPro.FLAG_KEEP)
+
+        DialogPro()
+                .setFlag(DialogPro.FLAG_KEEP)
+                .setFragments(fragments)
+                .setOnPageSelectedListener(object : OnPageSelectedListener {
+                    override fun onPageSelected(pagePosition: Int) {
+                        Log.e("steve", pagePosition.toString())
+                    }
+                })
+                .show(this)
     }
 }
