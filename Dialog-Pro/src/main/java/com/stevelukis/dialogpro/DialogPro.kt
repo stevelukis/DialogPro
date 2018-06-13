@@ -96,7 +96,7 @@ class DialogPro : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.dialog_pro, container).let {
-                val viewPager = it.findViewById<ViewPager>(R.id.viewPager)
+                val viewPager = it.findViewById<ViewPager>(R.id.proViewPager)
 
                 val adapter = ProPagerAdapter(fragments)
                 val fragmentManager = childFragmentManager
@@ -140,7 +140,7 @@ class DialogPro : DialogFragment() {
                 })
 
                 //Add the left/right arrow.
-                val viewPagerArrowIndicator = it.findViewById<ViewPagerArrowIndicator>(R.id.viewPagerArrowIndicator)
+                val viewPagerArrowIndicator = it.findViewById<ViewPagerArrowIndicator>(R.id.proViewPagerArrowIndicator)
                 viewPagerArrowIndicator.bind(viewPager)
                 viewPagerArrowIndicator.setArrowIndicatorRes(leftArrowResId, rightArrowResId)
 

@@ -1,1 +1,1 @@
-include ':sample', ':dialogpro'
+include ':sample', ':Dialog-Pro'

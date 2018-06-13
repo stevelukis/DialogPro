@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/margin"
-    android:paddingStart="@dimen/margin">
+    android:paddingEnd="@dimen/pro_margin"
+    android:paddingStart="@dimen/pro_margin">
 
     <com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator
-        android:id="@+id/viewPagerArrowIndicator"
+        android:id="@+id/proViewPagerArrowIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+            android:id="@+id/proViewPager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_height"
+            android:layout_height="@dimen/pro_default_height"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toEndOf="parent"
