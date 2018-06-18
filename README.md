@@ -3,6 +3,16 @@ Dialog contains multiple fragments which can be explored by swiping.
 
 ![Example](https://stevelukis.com/cloud/dialogpro/example.gif)
 
+### Implementation
+Add this depedency in your app level gradle file :
+```
+dependencies {
+    ...
+    implementation 'com.stevelukis.dialogpro:Dialog-Pro:1.0.0'
+    ...
+}
+```
+
 ### Flag
 There are two flags available.
 - FLAG_KEEP
